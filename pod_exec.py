@@ -32,7 +32,7 @@ def check_resources_exist(api_instance, args):
     try:
         pvcs = api_instance.list_persistent_volume_claim_for_all_namespaces(watch=False)
 
-        expected_pvc = [pvc for pvc in pvcs.items if pvc.metadata.name is pvc_name]
+        expected_pvc = [pvc for pvc in pvcs.items if pvc.metadata.name == pvc_name]
 
         if not expected_pvc:
             print("Pvc %s does not exist in namespace %s, exiting." % (pvc_name, namespace))
