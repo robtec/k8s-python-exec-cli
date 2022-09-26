@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: validator
+spec:
+  serviceAccountName: internal-k8s-client
+  containers:
+    - name: validator
+      image: python-k8s-exec
+      imagePullPolicy: Never # needed for local images
+      command:
+        - /bin/sh
+        - -ec
+        - |
+          python3 pod_exec.py --pod busybox-test
