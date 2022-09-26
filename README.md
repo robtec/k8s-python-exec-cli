@@ -9,7 +9,7 @@ The `pod_exec.py` copies a given script to a pod for it to be ran on that pod
 ## Example
 
 ```commandline
-$ python3 pod_exec.py --pod python --script say_hello.py
+$ python3 pod_exec.py --pod python-pod --pvc task-pv-claim --script say_hello.py
 
  Hello, It's me, I'm running on host python
 ```
