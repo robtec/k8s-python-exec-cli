@@ -50,7 +50,7 @@ def exec_commands(api_instance, args):
 
     check_resources_exist(api_instance, args)
 
-    python_command = "python /tmp/%s" % args.script
+    python_command = "python /tmp/%s --file /work/data/test.txt" % args.script
 
     exec_command = [
         args.shell,
@@ -88,8 +88,7 @@ def copy_file_to_pod(api_instance, args):
             tar.add(source_file)
 
         tar_buffer.seek(0)
-        commands = []
-        commands.append(tar_buffer.read())
+        commands = [tar_buffer.read()]
 
         while resp.is_open():
             resp.update(timeout=1)
