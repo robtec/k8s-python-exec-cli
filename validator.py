@@ -12,8 +12,14 @@ def process_file(args):
     data_file = open(args.file, 'r')
     lines_in_file = data_file.readlines()
 
+    found = {}
+
     for line in lines_in_file:
-        print("{}".format(line))
+        if 'hello' in line:
+            parts = line.split('-')
+            found[parts[0]] = parts[1]
+
+    print(found)
 
 
 def main():
