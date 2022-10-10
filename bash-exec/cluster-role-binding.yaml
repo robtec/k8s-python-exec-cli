@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-role-pod-exec
+subjects:
+  - kind: ServiceAccount
+    name: script-k8s-client
+    namespace: default # namespace of verification pod
+roleRef:
+  kind: ClusterRole
+  name: cluster-pods-exec
+  apiGroup: rbac.authorization.k8s.io
