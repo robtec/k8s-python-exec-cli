@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: verification-deployment
+  labels:
+    app: verification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: verification
+  template:
+    metadata:
+      labels:
+        app: verification
+    spec:
+      serviceAccountName: script-k8s-client
+      containers:
+        - name: verification
+          image: verification-image
+          imagePullPolicy: Never # needed for local images
+          volumeMounts:
+            - name: verification-volume-ro
+              mountPath: /verification/
+          command:
+            - /bin/sh
+            - -ec
+            - |
+              echo "Copy script from configmap, as configmap is read-only"
+              cp /verification/verification-shell-script.sh script.sh
+
+              chmod +x script.sh
+              
+              while true; do
+                echo "Running verification script"
+                bash script.sh
+                sleep 3000
+              done
+      volumes:
+        - name: verification-volume-ro
+          configMap:
+            name: verification-script
