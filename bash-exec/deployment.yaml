@@ -28,14 +28,9 @@ spec:
             - /bin/sh
             - -ec
             - |
-              echo "Copy script from configmap, as configmap is read-only"
-              cp /verification/verification-shell-script.sh script.sh
-
-              chmod +x script.sh
-              
               while true; do
                 echo "Running verification script"
-                bash script.sh
+                bash /verification/verification-shell-script.sh
                 sleep 3000
               done
       volumes:
