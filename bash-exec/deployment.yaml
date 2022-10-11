@@ -22,6 +22,8 @@ spec:
           volumeMounts:
             - name: verification-volume-ro
               mountPath: /verification/
+            - mountPath: "/work/data/"
+              name: pv-storage
           command:
             - /bin/sh
             - -ec
@@ -37,6 +39,9 @@ spec:
                 sleep 3000
               done
       volumes:
+        - name: pv-storage
+          persistentVolumeClaim:
+            claimName: pv-claim
         - name: verification-volume-ro
           configMap:
             name: verification-script

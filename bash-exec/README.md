@@ -20,7 +20,7 @@ $ kubectl apply -f cluster-role.yaml
 $ kubectl apply -f cluster-binding.yaml
 ```
 
-## Create Pod
+## Create Deployment
 ```
-$ kubectl apply -f pod.yaml
+$ kubectl apply -f deployment.yaml
 ```
